@@ -5,7 +5,6 @@ import com.example.studentmangement.entity.Student;
 import com.example.studentmangement.entity.StudentCourse;
 import com.example.studentmangement.repo.StudentCourseRepo;
 import com.example.studentmangement.repo.StudentRepo;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -57,7 +56,6 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    @Cacheable(value = "StudentCache", unless = "#result == null", key = "{#studentEmail}")
     public Optional<Student> findByEmail(String studentEmail) {
         return studentRepo.findByEmail(studentEmail);
     }

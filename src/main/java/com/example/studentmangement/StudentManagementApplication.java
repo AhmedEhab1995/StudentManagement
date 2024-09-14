@@ -11,6 +11,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import redis.embedded.RedisServer;
+
+import java.io.IOException;
 
 @EnableCaching
 @SpringBootApplication
@@ -24,7 +27,25 @@ public class StudentManagementApplication implements ApplicationRunner {
 
 
     public static void main(String[] args) {
+        initializeEmbeddedRedis();
         SpringApplication.run(StudentManagementApplication.class, args);
+    }
+
+    private static void initializeEmbeddedRedis() {
+        try {
+            var server = new RedisServer(6379);
+            server.start();
+            Runtime.getRuntime()
+                    .addShutdownHook(new Thread(() -> {
+                        try {
+                            server.stop();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

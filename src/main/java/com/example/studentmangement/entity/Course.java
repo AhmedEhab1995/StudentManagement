@@ -1,15 +1,18 @@
 package com.example.studentmangement.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Setter
 @Getter
 @NoArgsConstructor
 @Entity
 @Table(name = "courses")
+@Cacheable
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Course {
 

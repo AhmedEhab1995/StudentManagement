@@ -2,9 +2,8 @@ package com.example.studentmangement.service;
 
 import com.example.studentmangement.entity.Course;
 import com.example.studentmangement.repo.CourseRepo;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +19,7 @@ public class CourseServiceImpl implements CourseService {
 
 
     @Override
+    @Transactional
     public List<String> findAll() {
         return courseRepo.findAll()
                 .stream()

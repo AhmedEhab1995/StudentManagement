@@ -3,8 +3,8 @@ package com.example.studentmangement.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Setter
 @Getter
@@ -13,8 +13,8 @@ import org.hibernate.annotations.Cache;
 @Entity
 @Builder
 @Table(name = "students")
+@Cacheable
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-
 public class Student {
 
     @Id
