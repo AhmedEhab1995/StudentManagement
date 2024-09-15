@@ -12,6 +12,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @EnableCaching
 @SpringBootApplication
 public class StudentManagementApplication implements ApplicationRunner {
@@ -43,7 +46,16 @@ public class StudentManagementApplication implements ApplicationRunner {
                 .build()
         );
 
-        courseRepo.save(new Course("Course 1"));
-        courseRepo.save(new Course("Course 2"));
+        List<String> course1Schedule = new ArrayList<>();
+        course1Schedule.add("Monday 10:00 AM - 12:00 PM");
+        course1Schedule.add("Wednesday 2:00 PM - 4:00 PM");
+
+        List<String> course2Schedule = new ArrayList<>();
+        course2Schedule.add("Tuesday 9:00 AM - 11:00 AM");
+        course2Schedule.add("Thursday 3:00 PM - 5:00 PM");
+
+        courseRepo.save(new Course("Course 1", course1Schedule));
+        courseRepo.save(new Course("Course 2", course2Schedule));
+
     }
 }
